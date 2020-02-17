@@ -6,7 +6,12 @@ const mongoose=require('mongoose');
 const MONGODB_URI='mongodb+srv://we:itigrad@cluster0-8wq1d.mongodb.net/grad?retryWrites=true&w=majority'
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+const adminRoutes = require("./routes/admin");
+const playgroundRoutes = require("./routes/playgrounds");
+
+
+
+
 mongoose.connect(
     MONGODB_URI,
      {
@@ -22,6 +27,27 @@ mongoose.connect(
    .catch(err =>{
      console.log(err);
    });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/images", express.static(path.join("images")));
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, DELETE, OPTIONS"
+  );
+  next();
+});
+
+app.use("/admin", adminRoutes);
+app.use("/playgrounds", playgroundRoutes);
+
 
 
   

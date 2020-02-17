@@ -15,20 +15,15 @@
 </head>
 
 <body>
-    <!-- Preloader -->
-    <!-- <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="cssload-container">
-            <div class="cssload-loading"><i></i><i></i><i></i><i></i></div>
-        </div>
-    </div> -->
+     
 
- 
-  
+ <mat-spinner *ngIf='isLoading'></mat-spinner>
+  <main *ngIf='!isLoading'> 
 
     <!-- ##### Breadcumb Area Start ##### -->
     <section class="breadcumb-area bg-img d-flex align-items-center justify-content-center" style="background-image: url(https://images.unsplash.com/photo-1560272564-c83b66b1ad12?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1374&q=80);">
         <div class="bradcumbContent">
-            <h2>Name</h2>
+            <h2>{{playground.name}}</h2>
         </div>
     </section>
     <!-- ##### Breadcumb Area End ##### -->
@@ -49,31 +44,23 @@
                             </div>
  
                             <!-- Form Group -->
-                            <div class="form-group">
-                                <label for="select3">AM Reservation</label>
-                                <select class="form-control" id="select3">
-                                  <option>Select</option>
-                                  <option>12-02</option>
-                                  <option>02-04</option>
-                                  <option>04-06</option>
-                                  <option>06-08</option>
-                                  <option>08-10</option>
-                                  <option>10-12</option>
-                                </select>
+                            <div class="form-group"> 
+                                <mat-form-field>
+                                    <label for="select3">AM Reservation</label>
+                                    <mat-select  [(value)]="userSelectedAmHours" multiple>
+                                      <mat-option *ngFor="let hour of playground.amHours" [value]="hour">{{hour}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
 
                             <!-- Form Group -->
                             <div class="form-group">
-                                <label for="select4">PM Reservation</label>
-                                <select class="form-control " id="select4">
-                                  <option>Select</option>
-                                  <option>12-02</option>
-                                  <option>02-04</option>
-                                  <option>04-06</option>
-                                  <option>06-08</option>
-                                  <option>08-10</option>
-                                  <option>10-12</option>
-                                </select>
+                                <mat-form-field>
+                                    <label for="select3">PM Reservation</label>
+                                    <mat-select  [(value)]="userSelectedPmHours" multiple>
+                                      <mat-option *ngFor="let hour of playground.pmHours" [value]="hour">{{hour}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
 
                             <!-- Button -->
@@ -94,16 +81,16 @@
                     <div class="about-text mb-100">
                         <div class="section-heading">
                             <div class="line-"></div>
-                            <h2>Playground</h2>
+                            <h2>{{playground.name}}</h2>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
+                        <p>{{playground.description}}</p>
                         <a href="#" class="btn palatin-btn mt-50">Read More</a>
                     </div>
                 </div>
 
                 <div class="col-12 col-lg-6">
                     <div class="about-thumbnail mb-100">
-                        <img src="https://images.unsplash.com/photo-1510051640316-cee39563ddab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="">
+                        <img src="{{playground.imagePath}}" alt="">
                     </div>
                 </div>
             </div>
@@ -290,6 +277,7 @@
             </div>
         </div>
     </footer>
+</main>
     <!-- ##### Footer Area End ##### -->
 
     <!-- ##### All Javascript Script ##### -->

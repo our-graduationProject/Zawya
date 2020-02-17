@@ -23,6 +23,12 @@
   body {
     font-family: "FuturaLT-Book";
     font-size: 14px; }
+ mat-form-field {
+      width: 100%;
+    }  
+mat-spinner {
+      margin: auto;
+    }   
   
   h1,
   h2,
